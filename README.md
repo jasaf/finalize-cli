@@ -20,5 +20,5 @@ Example use to generate a summary report from a CSV file
 ## 🛠️ Purpose
 This project was developed for personal use to simplify financial data analysis and automate report generation.
 
-👨‍💻 Author
+## 👨‍💻 Author
 - FJ (github.com/jasaf)
