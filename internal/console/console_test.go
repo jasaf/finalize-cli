@@ -12,6 +12,8 @@ import (
 
 func TestParseUserInput(t *testing.T) {
 	parseDate := func(dateStr string) time.Time {
+		t.Helper()
+
 		date, err := helpers.StringToDate(dateStr)
 		if err != nil {
 			t.Fatalf("Failed to parse date %s: %v", dateStr, err)
@@ -62,20 +64,15 @@ func TestParseUserInput(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		tt := tt // Capture range variable
 		t.Run(tt.name, func(t *testing.T) {
 			// Create a new FlagSet for each test case
 			fs := flag.NewFlagSet(tt.name, flag.ExitOnError)
 
 			// Call ParseUserInput with the custom FlagSet and arguments
 			got, err := ParseUserInput(fs, tt.args)
+
 			if (err != nil) != tt.expectError {
 				t.Fatalf("ParseUserInput() error = %v, expectError %v", err, tt.expectError)
-			}
-
-			// If an error is expected, we are done
-			if tt.expectError {
-				return
 			}
 
 			// Compare the actual and expected results

@@ -21,6 +21,7 @@ clean:
 	rm -f bin/$(BINARY_NAME) $(COVERAGE_FILE) $(COVERAGE_HTML)
 
 # Run tests with verbose output
+.PHONY: test
 test:
 	@echo "Running all tests..."
 	go test ./... -v

@@ -59,11 +59,11 @@
 				
 				<option value="file1">github.com/jasaf/finalize-cli/internal/console/console.go (68.0%)</option>
 				
-				<option value="file2">github.com/jasaf/finalize-cli/internal/file/file.go (0.0%)</option>
+				<option value="file2">github.com/jasaf/finalize-cli/internal/file/file.go (94.4%)</option>
 				
 				<option value="file3">github.com/jasaf/finalize-cli/internal/helpers/dateformat.go (100.0%)</option>
 				
-				<option value="file4">github.com/jasaf/finalize-cli/internal/item/item.go (0.0%)</option>
+				<option value="file4">github.com/jasaf/finalize-cli/internal/item/item.go (100.0%)</option>
 				
 				</select>
 			</div>
@@ -187,33 +187,32 @@ import (
         "github.com/jasaf/finalize-cli/internal/types"
 )
 
-func ReadCsvFile(name string) (*[]types.RowItem, error) <span class="cov0" title="0">{
-
+func ReadCsvFile(name string) (*[]types.RowItem, error) <span class="cov8" title="1">{
         data, err := os.ReadFile(name)
-        if err != nil </span><span class="cov0" title="0">{
+        if err != nil </span><span class="cov8" title="1">{
                 return nil, err
         }</span>
 
-        <span class="cov0" title="0">r := csv.NewReader(bytes.NewReader(data))
+        <span class="cov8" title="1">r := csv.NewReader(bytes.NewReader(data))
 
         records, err := r.ReadAll()
         if err != nil </span><span class="cov0" title="0">{
                 return nil, err
         }</span>
 
-        <span class="cov0" title="0">var items []types.RowItem
-        for _, record := range records[1:] </span><span class="cov0" title="0">{
+        <span class="cov8" title="1">var items []types.RowItem
+        for _, record := range records[1:] </span><span class="cov8" title="1">{
                 amount, err := strconv.ParseFloat(record[3], 64)
-                if err != nil </span><span class="cov0" title="0">{
+                if err != nil </span><span class="cov8" title="1">{
                         return nil, err
                 }</span>
 
-                <span class="cov0" title="0">date, err := helpers.StringToDate(record[0])
-                if err != nil </span><span class="cov0" title="0">{
+                <span class="cov8" title="1">date, err := helpers.StringToDate(record[0])
+                if err != nil </span><span class="cov8" title="1">{
                         return nil, err
                 }</span>
 
-                <span class="cov0" title="0">newItem := types.RowItem{
+                <span class="cov8" title="1">newItem := types.RowItem{
                         Date:        date,
                         Category:    record[1],
                         Subcategory: record[2],
@@ -225,7 +224,7 @@ func ReadCsvFile(name string) (*[]types.RowItem, error) <span class="cov0" title
                 items = append(items, newItem)</span>
         }
 
-        <span class="cov0" title="0">return &amp;items, nil</span>
+        <span class="cov8" title="1">return &amp;items, nil</span>
 }
 </pre>
 		
@@ -254,35 +253,35 @@ import (
         "github.com/jasaf/finalize-cli/internal/types"
 )
 
-func CategoriseItems(items *[]types.RowItem, fromDate, toDate time.Time) *types.CategoryTotals <span class="cov0" title="0">{
+func CategoriseItems(items *[]types.RowItem, fromDate, toDate time.Time) *types.CategoryTotals <span class="cov8" title="1">{
         filteredItems := make(types.CategoryTotals)
 
-        for _, record := range *items </span><span class="cov0" title="0">{
-                if record.Date.Before(fromDate) || record.Date.After(toDate) </span><span class="cov0" title="0">{
+        for _, record := range *items </span><span class="cov8" title="1">{
+                if record.Date.Before(fromDate) || record.Date.After(toDate) </span><span class="cov8" title="1">{
                         continue</span>
                 }
 
-                <span class="cov0" title="0">_, categoryExists := filteredItems[record.Category]
-                if !categoryExists </span><span class="cov0" title="0">{
+                <span class="cov8" title="1">_, categoryExists := filteredItems[record.Category]
+                if !categoryExists </span><span class="cov8" title="1">{
                         filteredItems[record.Category] = make(types.SubCategoryWithCurrencyTotal)
                 }</span>
 
-                <span class="cov0" title="0">categoryMap := filteredItems[record.Category]
+                <span class="cov8" title="1">categoryMap := filteredItems[record.Category]
                 _, subCategoryExists := categoryMap[record.Subcategory]
-                if !subCategoryExists </span><span class="cov0" title="0">{
+                if !subCategoryExists </span><span class="cov8" title="1">{
                         categoryMap[record.Subcategory] = make(types.CurrencyTotal)
                 }</span>
 
-                <span class="cov0" title="0">currencyTotal := categoryMap[record.Subcategory]
+                <span class="cov8" title="1">currencyTotal := categoryMap[record.Subcategory]
                 _, currencyExists := currencyTotal[record.Currency]
-                if !currencyExists </span><span class="cov0" title="0">{
+                if !currencyExists </span><span class="cov8" title="1">{
                         currencyTotal[record.Currency] = 0
                 }</span>
 
-                <span class="cov0" title="0">currencyTotal[record.Currency] += record.Amount</span>
+                <span class="cov8" title="1">currencyTotal[record.Currency] += record.Amount</span>
         }
 
-        <span class="cov0" title="0">return &amp;filteredItems</span>
+        <span class="cov8" title="1">return &amp;filteredItems</span>
 }
 </pre>
 		

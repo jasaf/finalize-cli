@@ -11,7 +11,6 @@ import (
 )
 
 func ReadCsvFile(name string) (*[]types.RowItem, error) {
-
 	data, err := os.ReadFile(name)
 	if err != nil {
 		return nil, err
