@@ -5,8 +5,8 @@ Financial Reporter is a simple command-line application built in Go for analyzin
 ## 🚀 Features
 - Parse and analyze financial data from CSV files.
 - Generate summary reports by category and subcategory.
-- Filter data by date range
-- Export reports to JSON
+- Filter data by date range.
+- Print JSON output in the console.
 
 
 ## 🛠️ Purpose
