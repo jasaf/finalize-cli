@@ -10,7 +10,7 @@ func CategoriseItems(items *[]types.RowItem, fromDate, toDate time.Time) *types.
 	filteredItems := make(types.CategoryTotals)
 
 	for _, record := range *items {
-		if !record.Date.After(fromDate) && !record.Date.Before(toDate) {
+		if record.Date.Before(fromDate) || record.Date.After(toDate) {
 			continue
 		}
 
