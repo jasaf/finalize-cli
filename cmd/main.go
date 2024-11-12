@@ -1,7 +1,9 @@
 package main
 
 import (
+	"flag"
 	"log"
+	"os"
 
 	"github.com/jasaf/finalize-cli/internal/console"
 	"github.com/jasaf/finalize-cli/internal/file"
@@ -9,7 +11,8 @@ import (
 )
 
 func main() {
-	userInput, err := console.ParseUserInput()
+	fs := flag.CommandLine
+	userInput, err := console.ParseUserInput(fs, os.Args[1:])
 	if err != nil {
 		log.Fatalf("Error while parsing user input, %s\n", err)
 	}

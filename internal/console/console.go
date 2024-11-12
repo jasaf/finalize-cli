@@ -11,13 +11,23 @@ import (
 	"github.com/jasaf/finalize-cli/internal/types"
 )
 
-var inputFlag string
-var filterDateFlag string
+func ParseUserInput(fs *flag.FlagSet, args []string) (*types.UserInput, error) {
+	var inputFlag string
+	var filterDateFlag string
 
-func ParseUserInput() (*types.UserInput, error) {
-	flag.StringVar(&inputFlag, "input", "", "Insert CSV file name with extension")
-	flag.StringVar(&filterDateFlag, "date", "", "Insert date range with the following format [from:to]")
-	flag.Parse()
+	fs.StringVar(&inputFlag, "input", "", "Insert CSV file name with extension")
+	fs.StringVar(&filterDateFlag, "date", "", "Insert date range with the following format [from:to]")
+
+	if err := fs.Parse(args); err != nil {
+		return nil, err
+	}
+
+	if len(inputFlag) < 1 {
+		return nil, errors.New("file name input flag is empty")
+	}
+	if len(filterDateFlag) < 1 {
+		return nil, errors.New("filter date flag is empty")
+	}
 
 	betweenDates := strings.Split(filterDateFlag, ":")
 
